@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav_sidebar.css' %}">
+
+    <!-- Bootstrap JS (Popper.js is a required dependency for some Bootstrap components) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <main>
+        <nav>
+            <div class="row">
+                <div class="navy">
+                    <h1 class="display-3">☔  WEATHER WAND  ☀️</h1>
+                </div>
+            </div>
+            <div class="hello">
+                Hello &#x1F44B; and welcome to Weather Wand where you get to find weather readings of different places
+            </div>
+        </nav>
+    </main>
+
+    
+
+    <div class="container">
+        <h2>Enter name of city</h2>
+        <form method="post" action="#weatherinfo" id="weatherform" >
+            {% csrf_token %}
+            <!-- <label for="city">City</label> -->
+            <input type="text" placeholder="Enter a city" name="city" id="city" required>
+            <br>
+            <button value="submit">submit</button>
+        </form>
+        <div class="error">
+            {% if city_error %}
+            <p style="color: black;" class="error-message"> {{ city_error }}</p>
+            {% endif %}
+        </div>       
+    </div>
+
+
+    <div class="info" id="weatherinfo" >
+        {% if city %}
+        <h1 class="display-4">City: <p class="display-4 text-uppercase">{{city}} </p></h1>
+        <h1 class="display-4">Country: <p class="display-4 text-uppercase">{{country_code}} </p></h1>
+        <h1 class="display-4">Time: <p class="display-4 text-uppercase">{{timezone}} </p></h1>
+        <h1 class="display-4">Temperature: {{temp|floatformat:"2"}} °C</h1>
+        <h1 class="display-4">Description: <p class="display-4 text-uppercase">{{desc}}</p></h1>
+        {% endif %}
+    </div>        
+    <script src="static/js/error.js"></script>
+
+</body>
+</html>
