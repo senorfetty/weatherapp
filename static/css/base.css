@@ -1131,7 +1131,9 @@ nav {
     text-align: center;
     text-decoration: double;
     background-color: gray;
-    font-weight: bold;
+    font-weight: bold;    
+    position: sticky;
+    top: 0;
 }
 
 h1.display-3{
