@@ -1,6 +1,9 @@
 from django.shortcuts import render
 import requests
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Create your views here.
 
 def format_timezone(offset_seconds):
@@ -14,7 +17,7 @@ def index(request):
     if request.method == 'POST':
         city= request.POST.get('city')
 
-        api_key= '8b7273e4827aecc37a1424f63c3345bd'
+        api_key= os.getenv('myapikey')
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
 
         response= requests.get(url)
